@@ -1,22 +1,19 @@
 import { LayoutDashboard } from "@/components/LayoutDashboard";
 import { cookies } from 'next/headers'
 import { redirect } from "next/navigation";
-import { verificaTokenExpirado } from "@/services/token";
 
 export default function Dashboard() {
 
     const cookie = cookies();
 
-    const token = cookie.get('painel1pitchau.token')
-
-    if (!token?.value || verificaTokenExpirado(token.value)) {
+    const token = cookie.get('@token')  
+    if (!token) {
         redirect('/login')
-    }    
+    }
 
-    console.log("passou console")
     return(
         <LayoutDashboard
-            token={token.value}
+            token={token?.value}
         >
             <h1>Dashboard Saude</h1>
         </LayoutDashboard>

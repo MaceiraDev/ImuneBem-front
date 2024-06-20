@@ -1,5 +1,5 @@
 
- import { ReactNode } from "react"
+import { ReactNode } from "react"
 
 interface IProps {
     children: ReactNode
@@ -14,7 +14,7 @@ export const LayoutDashboard = (props: IProps) => {
             >
                 <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3"
                     href="#">
-                    Painel Admin Imune Bem
+                    Painel Imune Bem
                 </a>
                 <button
                     className="navbar-toggler position-absolute d-md-none collapsed"
@@ -45,19 +45,13 @@ export const LayoutDashboard = (props: IProps) => {
                         <div className="position-sticky pt-3">
                             <ul className="nav flex-column">
                                 <li className="nav-item">
-                                    <a
-                                        className={`nav-link`}
-                                        href={'/dashboard'}
-                                    >
+                                    <a className={`nav-link`} href={'/dashboard'}>
                                         <span data-feather="home"></span>
                                         Dashboard
                                     </a>
                                 </li>
                                 <li className="nav-item">
-                                    <a
-                                        className={`nav-link`}
-                                        href={'/dashboard'}
-                                    >
+                                    <a className={`nav-link`} href={'/dashboard'}>
                                         <span data-feather="home"></span>
                                         Categorias
                                     </a>

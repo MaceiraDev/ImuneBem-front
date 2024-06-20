@@ -12,6 +12,7 @@ export default function Login() {
     const refForm = useRef<any>();
     const [toast, setToast] = useState(false)
     const [loading, setLoading] = useState(false)
+    // const [user, setUser] = useState<IUser>()
 
     const submitForm = useCallback((e: SyntheticEvent) => {
         e.preventDefault();
@@ -21,32 +22,19 @@ export default function Login() {
 
             const target = e.target as typeof e.target & {
                 email: { value: string },
-                senha: { value: string },
+                cpf: { value: string },
             }
 
-            axios.post('/api/login',
+            axios.post('http://127.0.0.1:8000/api/login',
                 {
                     email: target.email.value,
-                    senha: target.senha.value,
+                    cpf: target.cpf.value,
                 }
             )
-                .then((resposta) => {
-                    // SPA - React
-                    // LocalStorage -> Navegador
-                    // SessionStorage -> Navegador - X
-                    
-                    // Nextjs - SSR - Servidor
-                    // Requisição -> Headers
-                    // Cookies -> Navegador
-
-                    setCookie(
-                        undefined,
-                        'painel1pitchau.token',
-                        resposta.data.token
-                    )
-
+                .then((res) => {
+                    setCookie(undefined, '@user', JSON.stringify(res.data.user))
+                    setCookie(undefined, '@token', res.data.token)
                     router.push('/dashboard')
-
                     setLoading(false)
                 })
                 .catch((err) => {
@@ -114,16 +102,16 @@ export default function Login() {
                             className='col-md-12 mt-1'
                         >
                             <label
-                                htmlFor='senha'
+                                htmlFor='cpf'
                                 className='form-label'
                             >
                                 Senha
                             </label>
                             <input
-                                type='password'
+                                type='text'
                                 className='form-control'
                                 placeholder='Digite sua senha'
-                                id='senha'
+                                id='cpf'
                                 required
                             />
                             <div
