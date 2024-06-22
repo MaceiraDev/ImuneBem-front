@@ -6,16 +6,15 @@ export default function Dashboard() {
 
     const cookie = cookies();
 
-    const token = cookie.get('@token')  
+    const token = cookie.get('@token')
     if (!token) {
         redirect('/login')
     }
-
-    return(
+    return (
         <LayoutDashboard
             token={token?.value}
         >
-            <h1>Dashboard Saude</h1>
+            <h1>Dashboard Saudeeeeee</h1>
         </LayoutDashboard>
     )
 }

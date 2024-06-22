@@ -3,7 +3,9 @@ import { SyntheticEvent, useCallback, useRef, useState } from 'react'
 import styles from './style.module.css'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { setCookie } from 'nookies'
+import { setCookie } from 'nookies';
+import Card from 'react-bootstrap/Card';
+import InputMask from 'react-input-mask';
 
 export default function Login() {
 
@@ -21,14 +23,22 @@ export default function Login() {
             setLoading(true)
 
             const target = e.target as typeof e.target & {
-                email: { value: string },
+                password: { value: string },
                 cpf: { value: string },
             }
 
+            //Pega o valor do cpf e remove os . e -
+            const cleanCPF = (cpf: string) => cpf.replace(/[^\d]/g, '');
+            //salva o valor formatodo na const cpf
+            const cpf = cleanCPF(target.cpf.value);
+
+            console.log('cpf logo a baxio')
+            console.log(cpf)
             axios.post('http://127.0.0.1:8000/api/login',
                 {
-                    email: target.email.value,
-                    cpf: target.cpf.value,
+                    password: target.password.value,
+                    //cpf é igual a const cpf formatada
+                    cpf: cpf,
                 }
             )
                 .then((res) => {
@@ -52,86 +62,87 @@ export default function Login() {
 
     return (
         <>
+            <div className='container'>
+                <div className={styles.div_pai}>
+                    <Card style={{ width: '100%', boxShadow: 'rgba(0, 0, 0, 0.25) 0px 25px 50px -12px', }}>
+                        <div className='row'>
+                            <div className='col-md-6'>
+                                <div className='div_img'>
+                                    <img className={styles.img_login} src='/imagens/vacina_back.jpg' alt='Imagem de Login' />
+                                </div>
+                            </div>
+                            <div className='col-md-6'>
+                                <div className={styles.div_filho}>
 
-            <div
-                className={styles.main}
-            >
-                <div
-                    className={styles.border}
-                >
-                    <div
-                        className='d-flex flex-column align-items-center'
-                    >
-                        <h1 className='text-primary' >Login</h1>
-                        <p
-                            className='text-secondary'
-                        >
-                            Preencha os campos para logar no sistema!
-                        </p>
-                    </div>
-                    <hr />
-                    <form
-                        className='needs-validation align-items-center'
-                        noValidate
-                        onSubmit={submitForm}
-                        ref={refForm}
-                    >
-                        <div
-                            className='col-md-12'
-                        >
-                            <label
-                                htmlFor='email'
-                                className='form-label'
-                            >
-                                Email
-                            </label>
-                            <input
-                                type='email'
-                                className='form-control'
-                                placeholder='Digite seu email'
-                                id='email'
-                                required
-                            />
-                            <div
-                                className='invalid-feedback'
-                            >
-                                Por favor digite seu email
+                                    <form
+                                        className='needs-validation align-items-center'
+                                        noValidate
+                                        onSubmit={submitForm}
+                                        ref={refForm}
+                                    >
+                                        <h1 className={styles.title}>ImuneBem</h1>
+                                        <h3 className={styles.title_login} >Login</h3>
+                                        <p>Digite os campos abaixo para entrar no painel</p>
+                                        <div
+                                            className='col-md-12'
+                                        >
+                                            <label
+                                                htmlFor='email'
+                                                className='form-label'
+                                            >
+                                                CPF
+                                            </label>
+                                            <InputMask
+                                                mask='999.999.999-99'
+                                                className='form-control'
+                                                placeholder='Digite seu CPF:'
+                                                id='cpf'
+                                                required
+                                            />
+                                            <div
+                                                className='invalid-feedback'
+                                            >
+                                                Digite seu CPF:
+                                            </div>
+                                        </div>
+                                        <div
+                                            className='col-md-12 mt-1'
+                                        >
+                                            <label
+                                                htmlFor='cpf'
+                                                className='form-label'
+                                            >
+                                                Senha
+                                            </label>
+                                            <input
+                                                type='text'
+                                                className='form-control'
+                                                placeholder='Digite sua senha:'
+                                                id='password'
+                                                required
+                                            />
+                                            <div
+                                                className='invalid-feedback'
+                                            >
+                                                Digite sua senha:
+                                            </div>
+                                        </div>
+                                        <div
+                                            className='col-md-12 mt-3'
+                                        >
+                                            <button
+                                                className={styles.btn_log}
+                                                type='submit'
+                                                id='botao'
+                                            >
+                                                Enviar
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                        <div
-                            className='col-md-12 mt-1'
-                        >
-                            <label
-                                htmlFor='cpf'
-                                className='form-label'
-                            >
-                                Senha
-                            </label>
-                            <input
-                                type='text'
-                                className='form-control'
-                                placeholder='Digite sua senha'
-                                id='cpf'
-                                required
-                            />
-                            <div
-                                className='invalid-feedback'
-                            >
-                                Por favor digite sua senha
-                            </div>
-                        </div>
-                        <div
-                            className='col-md-12 mt-3'
-                        >
-                            <button
-                                className='btn btn-primary w-100'
-                                type='submit'
-                                id='botao'
-                            >
-                                Enviar
-                            </button>
-                        </div>
-                    </form>
+                    </Card>
                 </div>
             </div>
         </>

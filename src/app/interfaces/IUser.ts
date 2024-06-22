@@ -5,3 +5,4 @@ export interface IUser {
     cpf: string,
     type_user: number
 }
+
