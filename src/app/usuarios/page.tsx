@@ -14,25 +14,44 @@ export default function Users() {
     const token = Cookies.get('@token');
     const router = useRouter();
 
+    const header = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    function listUser() {
+        axios.get<IUser[]>("http://127.0.0.1:8000/api/users", header
+        ).then(response => {
+            const data = response.data.data;
+            setUsers(data)
+        }
+
+        ).catch(error => {
+            console.error('Erro ao buscar usuários:', error);
+        });
+    }
     useEffect(() => {
         if (!token) {
             redirect('/login');
         } else {
-            axios.get<IUser[]>("http://127.0.0.1:8000/api/users", {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }).then(response => {
-                const data = response.data.data;
-                setUsers(data)
-            }
-
-            ).catch(error => {
-                console.error('Erro ao buscar usuários:', error);
-            });
+            listUser();
         }
     }, [token]);
 
+    async function deletarUser(id: number) {
+        if (!token) {
+            redirect('/login');
+        } else {
+            if (confirm('Deseja deletar esse usuário?')) {
+                axios.delete("http://127.0.0.1:8000/api/users/" + id, header).then(response => {
+                    const data = response.data;
+                    console.log(data);
+                    listUser();
+                }
+                )
+            }
+        }
+    }
 
     return (
         <LayoutDashboard
@@ -62,7 +81,7 @@ export default function Users() {
                             <td>{user.email}</td>
                             <td>{user.cpf}</td>
                             <td>{user.type_user}</td>
-                            <td><button type="button" className="btn btn-danger" ><i className="bi bi-trash"></i></button></td>
+                            <td><button type="button" className="btn btn-danger" onClick={() => deletarUser(user.id)}><i className="bi bi-trash"></i></button></td>
                         </tr>
                     ))}
                 </tbody>

@@ -4,7 +4,7 @@ import { LayoutDashboard } from "@/components/LayoutDashboard";
 import axios from "axios";
 import Cookies from 'js-cookie';
 import Link from "next/link";
-import router from "next/router";
+import { redirect } from "next/navigation";
 import { setCookie } from "nookies";
 import { SyntheticEvent, useCallback, useRef } from "react";
 import { Card } from "react-bootstrap";
@@ -60,6 +60,7 @@ export default function Users() {
                     // Manipule os erros aqui
                     console.error(error);
                 });
+            redirect('/usuarios')
 
         } else {
             refForm.current.classList.add('was-validated')
