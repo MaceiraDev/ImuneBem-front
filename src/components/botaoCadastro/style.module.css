@@ -1,7 +1,5 @@
-
-
 .botao_cadastro {
-    width: 20%;
+    width: 100%;
     background-color: #98fb98;
     border: solid 1px #000;
     border-radius: 4px;
@@ -9,4 +7,12 @@
     font-size: 12pt;
     font-weight: 700;
     padding: 5px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.botao_cadastro:hover {
+    background-color: #6eb36e;
 }
