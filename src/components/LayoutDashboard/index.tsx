@@ -56,6 +56,12 @@ export const LayoutDashboard = (props: IProps) => {
                                     </a>
                                 </li>
                                 <li className="nav-item">
+                                    <a className={`nav-link`} href={'/cuidadores-familiares'}>
+                                        <span data-feather="home"></span>
+                                        Cuidadores / Familiares
+                                    </a>
+                                </li>
+                                <li className="nav-item">
                                     <a className={`nav-link`} href={'/usuarios'}>
                                         <span data-feather="home"></span>
                                         Usuários

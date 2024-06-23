@@ -1,5 +1,5 @@
 "use client";
-import { IPatient } from "@/app/interfaces/IPatient";
+import { IEmployees } from "@/app/interfaces/IEmployees";
 import { LayoutDashboard } from "@/components/LayoutDashboard";
 import axios from "axios";
 import Cookies from 'js-cookie';
@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 import { SyntheticEvent, useCallback, useRef } from "react";
 import { Card } from "react-bootstrap";
 
-export default function NewPatient() {
+export default function NewCuidador() {
 
   const token = Cookies.get('@token');
   const refForm = useRef<any>();
@@ -20,22 +20,21 @@ export default function NewPatient() {
 
       const target = e.target as typeof e.target & {
         name: { value: string },
-        age: { value: number },
+        descripition: { value: number },
 
       }
-
       //const header 
       const header = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
-      axios.post<IPatient[]>(
-        "http://127.0.0.1:8000/api/patients",  // URL do endpoint
+      axios.post<IEmployees[]>(
+        "http://127.0.0.1:8000/api/employees",  // URL do endpoint
         {
           // Corpo da requisição (payload)
           name: target.name.value,
-          age: target.age.value
+          descripition: target.descripition.value
         },
         //passarndo header para autorizar a rota
         header
@@ -48,7 +47,7 @@ export default function NewPatient() {
           // Manipule os erros aqui
           console.error(error);
         });
-      redirect('/pacientes')
+      redirect('/cuidadores-familiares')
     } else {
       refForm.current.classList.add('was-validated')
 
@@ -59,7 +58,7 @@ export default function NewPatient() {
     <LayoutDashboard
       token={token}
     >
-      <h2 className="fw-bold mt-5">Novo Paciente</h2>
+      <h2 className="fw-bold mt-5">Novo Cuidador / Familiar</h2>
       <Card style={{ padding: '1rem', border: 'solid 1px #000' }}>
         <form
           className='needs-validation align-items-center'
@@ -91,24 +90,23 @@ export default function NewPatient() {
               </div>
             </div>
             <div
-              className='col-md-4'
+              className='col-md-6'
             >
               <label
-                htmlFor='age'
+                htmlFor='descripition'
                 className='form-label'
               >
-                Idade:
+                Descrição:
               </label>
-              <input
-                type='number'
+              <textarea
                 className='form-control'
-                id='age'
+                id='descripition'
                 required
-              />
+              ></textarea>
               <div
                 className='invalid-feedback'
               >
-                Digite uma idade:
+                Digite uma descrição:
               </div>
             </div>
 
@@ -118,7 +116,7 @@ export default function NewPatient() {
               <Link
                 className="btn btn-danger me-3"
                 type='button'
-                href={'/pacientes'}
+                href={'/cuidadores-familiares'}
                 id='botao'
               >
                 Cancelar

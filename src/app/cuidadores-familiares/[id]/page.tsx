@@ -79,7 +79,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
   return (
     <LayoutDashboard token={token}>
       <h2 className="fw-bold mt-5">Atualizar Paciente</h2>
-      <Card style={{ padding: '1rem', border: 'solid 1px #000' }}>
+      <Card style={{ padding: '1rem', boxShadow: 'rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;', border: 'solid 1px #000' }}>
         <form
           className='needs-validation align-items-center'
           noValidate
