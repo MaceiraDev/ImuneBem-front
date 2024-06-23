@@ -21,7 +21,7 @@ export default function NewPatient() {
       const target = e.target as typeof e.target & {
         name: { value: string },
         age: { value: number },
-
+        linked_email: { value: string }
       }
 
       //const header 
@@ -35,7 +35,8 @@ export default function NewPatient() {
         {
           // Corpo da requisição (payload)
           name: target.name.value,
-          age: target.age.value
+          age: target.age.value,
+          linked_email: target.linked_email.value
         },
         //passarndo header para autorizar a rota
         header
@@ -109,6 +110,28 @@ export default function NewPatient() {
                 className='invalid-feedback'
               >
                 Digite uma idade:
+              </div>
+            </div>
+
+            <div
+              className='col-md-4'
+            >
+              <label
+                htmlFor='linked_email'
+                className='form-label'
+              >
+                Email Vinculado
+              </label>
+              <input
+                type='email'
+                className='form-control'
+                id='linked_email'
+                required
+              />
+              <div
+                className='invalid-feedback'
+              >
+                Digite um email:
               </div>
             </div>
 

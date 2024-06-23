@@ -1,6 +1,6 @@
 export interface IEmployees {
   id: number;
   name: string;
-  descripition: string;
+  description: string;
   user_id: number;
 }

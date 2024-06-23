@@ -62,6 +62,7 @@ export default function Employees() {
           <tr>
             <th>ID</th>
             <th>Nome</th>
+            <th>Descrição</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -70,8 +71,9 @@ export default function Employees() {
             <tr key={employ.id}>
               <td>{employ.id}</td>
               <td>{employ.name}</td>
+              <td>{employ.description}</td>
               <td>
-                <Link href={'/pacientes/' + employ.id} type="button" title="Atualizar" className="btn btn-light me-1" ><i className="bi bi-pencil-square"></i></Link>
+                <Link href={'/cuidadores-familiares/' + employ.id} type="button" title="Atualizar" className="btn btn-light me-1" ><i className="bi bi-pencil-square"></i></Link>
                 <button type="button" title="Deletar" className="btn btn-danger" onClick={() => deletarEmployee(employ.id)}><i className="bi bi-trash"></i></button>
               </td>
             </tr>

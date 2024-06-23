@@ -20,7 +20,7 @@ export default function NewCuidador() {
 
       const target = e.target as typeof e.target & {
         name: { value: string },
-        descripition: { value: number },
+        description: { value: number },
 
       }
       //const header 
@@ -34,7 +34,7 @@ export default function NewCuidador() {
         {
           // Corpo da requisição (payload)
           name: target.name.value,
-          descripition: target.descripition.value
+          description: target.description.value
         },
         //passarndo header para autorizar a rota
         header
@@ -93,14 +93,14 @@ export default function NewCuidador() {
               className='col-md-6'
             >
               <label
-                htmlFor='descripition'
+                htmlFor='description'
                 className='form-label'
               >
                 Descrição:
               </label>
               <textarea
                 className='form-control'
-                id='descripition'
+                id='description'
                 required
               ></textarea>
               <div

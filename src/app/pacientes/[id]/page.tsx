@@ -14,6 +14,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
   const [patient, setPatient] = useState<IPatient | null>(null);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('');
+  const [linked_email, setMail] = useState('');
   const [age, setAge] = useState<number | ''>('');
   const token = Cookies.get('@token');
   const refForm = useRef<any>();
@@ -32,6 +33,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
         setPatient(patientData);
         setName(patientData.name); // Set initial value for name
         setAge(patientData.age); // Set initial value for age
+        setMail(patientData.linked_email);
         setLoading(false);
       }).catch(err => {
         console.error('Erro ao buscar pacientes:', err);
@@ -62,7 +64,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
     } else {
       refForm.current.classList.add('was-validated');
     }
-  }, [name, age, params.id]);
+  }, [name, age, linked_email, params.id]);
 
   useEffect(() => {
     if (!token) {
@@ -111,7 +113,29 @@ export default function UpPatients({ params }: { params: { id: string } }) {
               />
               <div className='invalid-feedback'>Digite uma idade:</div>
             </div>
-
+            <div
+              className='col-md-4'
+            >
+              <label
+                htmlFor='linked_email'
+                className='form-label'
+              >
+                Email Vinculado
+              </label>
+              <input
+                type='email'
+                className='form-control'
+                id='linked_email'
+                required
+                value={linked_email}
+                onChange={(e) => setMail(e.target.value)}
+              />
+              <div
+                className='invalid-feedback'
+              >
+                Digite um email:
+              </div>
+            </div>
             <div className='col-md-12 mt-3' style={{ textAlign: "right" }}>
               <Link
                 className="btn btn-danger me-3"

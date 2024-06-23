@@ -1,5 +1,5 @@
 "use client";
-import { IPatient } from "@/app/interfaces/IPatient";
+import { IEmployees } from "@/app/interfaces/IEmployees";
 import { LayoutDashboard } from "@/components/LayoutDashboard";
 import { Loading } from "@/components/Loading";
 import axios from "axios";
@@ -11,10 +11,10 @@ import { Card } from "react-bootstrap";
 
 export default function UpPatients({ params }: { params: { id: string } }) {
 
-  const [patient, setPatient] = useState<IPatient | null>(null);
+  const [employ, setEmploy] = useState<IEmployees | null>(null);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('');
-  const [age, setAge] = useState<number | ''>('');
+  const [description, setDesc] = useState('');
   const token = Cookies.get('@token');
   const refForm = useRef<any>();
 
@@ -24,17 +24,17 @@ export default function UpPatients({ params }: { params: { id: string } }) {
     },
   }
 
-  const getPatients = () => {
+  const getEmployes = () => {
     setLoading(true);
-    axios.get(`http://127.0.0.1:8000/api/patients/${params.id}`, header)
+    axios.get(`http://127.0.0.1:8000/api/employees/${params.id}`, header)
       .then(res => {
-        const patientData = res.data.data;
-        setPatient(patientData);
-        setName(patientData.name); // Set initial value for name
-        setAge(patientData.age); // Set initial value for age
+        const data = res.data.data;
+        setEmploy(data);
+        setName(data.name);
+        setDesc(data.description);
         setLoading(false);
       }).catch(err => {
-        console.error('Erro ao buscar pacientes:', err);
+        console.error('Erro ao buscar cuidador:', err);
         setLoading(false);
       });
   }
@@ -45,10 +45,10 @@ export default function UpPatients({ params }: { params: { id: string } }) {
     if (refForm.current.checkValidity()) {
 
       axios.put<IPatient>(
-        `http://127.0.0.1:8000/api/patients/${params.id}`,
+        `http://127.0.0.1:8000/api/employees/${params.id}`,
         {
           name: name,
-          age: age
+          description: description
         },
         header
       )
@@ -62,13 +62,13 @@ export default function UpPatients({ params }: { params: { id: string } }) {
     } else {
       refForm.current.classList.add('was-validated');
     }
-  }, [name, age, params.id]);
+  }, [name, description, params.id]);
 
   useEffect(() => {
     if (!token) {
       redirect('/login');
     } else {
-      getPatients();
+      getEmployes();
     }
   }, [token]);
 
@@ -78,7 +78,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
 
   return (
     <LayoutDashboard token={token}>
-      <h2 className="fw-bold mt-5">Atualizar Paciente</h2>
+      <h2 className="fw-bold mt-5">Atualizar Cuidador / Familiar</h2>
       <Card style={{ padding: '1rem', boxShadow: 'rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;', border: 'solid 1px #000' }}>
         <form
           className='needs-validation align-items-center'
@@ -99,24 +99,23 @@ export default function UpPatients({ params }: { params: { id: string } }) {
               />
               <div className='invalid-feedback'>Digite um nome:</div>
             </div>
-            <div className='col-md-4'>
-              <label htmlFor='age' className='form-label'>Idade:</label>
-              <input
-                type='number'
+            <div className='col-md-6'>
+              <label htmlFor='description' className='form-label'>Descrição:</label>
+              <textarea
                 className='form-control'
-                id='age'
+                id='description'
                 required
-                value={age}
-                onChange={(e) => setAge(Number(e.target.value))}
-              />
-              <div className='invalid-feedback'>Digite uma idade:</div>
+                value={description}
+                onChange={(e) => setDesc(e.target.value)}
+              ></textarea>
+              <div className='invalid-feedback'>Digite uma descrição:</div>
             </div>
 
             <div className='col-md-12 mt-3' style={{ textAlign: "right" }}>
               <Link
                 className="btn btn-danger me-3"
                 type='button'
-                href={'/pacientes'}
+                href={'/cuidadores-familiares'}
               >
                 Cancelar
               </Link>
