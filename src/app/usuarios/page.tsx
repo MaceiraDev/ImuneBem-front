@@ -55,9 +55,8 @@ export default function Users() {
     return (
         <LayoutDashboard>
             <Loading loading={loading} />
-            <h1>Usuários</h1>
-            <div className="row">
-                <div className="col-md-6"></div>
+            <div className="row mt-5">
+                <div className="col-md-6"><h2 className="fw-bold">Usuários</h2></div>
                 <div className="col-md-2 offset-4"> <BotaoCadastro rota={'/usuarios/novo-usuario'} titulo={"Novo Usuário"} /></div>
             </div>
             <Table striped bordered hover variant="dark" style={{ marginTop: '1rem' }}>

@@ -124,7 +124,7 @@ export default function Login() {
                                                 Senha
                                             </label>
                                             <input
-                                                type='text'
+                                                type='password'
                                                 className='form-control'
                                                 placeholder='Digite sua senha:'
                                                 id='password'

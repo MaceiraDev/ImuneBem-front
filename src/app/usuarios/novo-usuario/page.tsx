@@ -72,7 +72,7 @@ export default function Users() {
         <LayoutDashboard
             token={token}
         >
-            <h1>Novo Usuário</h1>
+            <h2 className="fw-bold mt-5">Novo Usuário</h2>
             <Card style={{ padding: '1rem', boxShadow: 'rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;', border: 'solid 1px #000' }}>
                 <form
                     className='needs-validation align-items-center'
@@ -135,6 +135,7 @@ export default function Users() {
                                 Tipo de Usuário:
                             </label>
                             <select className="form-select" id="type_user">
+                                <option disabled selected>Selecione</option>
                                 <option value={0}>Profissional da Saúde</option>
                                 <option value={1}>Cuidador / Familiar</option>
                                 <option value={2}>Idoso / Paciente</option>
@@ -176,7 +177,7 @@ export default function Users() {
                                 Senha
                             </label>
                             <input
-                                type='text'
+                                type='password'
                                 className='form-control'
                                 id='password'
                                 required

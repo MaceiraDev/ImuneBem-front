@@ -13,7 +13,7 @@ export const LayoutDashboard = (props: IProps) => {
             >
                 <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3"
                     href="#">
-                    Painel Imune Bem
+                    Painel ImuneBem
                 </a>
                 <button
                     className="navbar-toggler position-absolute d-md-none collapsed"
@@ -39,7 +39,7 @@ export const LayoutDashboard = (props: IProps) => {
                 <div className="row">
                     <nav
                         id="sidebarMenu"
-                        className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
+                        className="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse"
                     >
                         <div className="position-sticky pt-3">
                             <ul className="nav flex-column">
@@ -64,11 +64,9 @@ export const LayoutDashboard = (props: IProps) => {
                             </ul>
                         </div>
                     </nav>
-
                     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                         {props.children}
                     </main>
-
                 </div>
             </div>
         </>

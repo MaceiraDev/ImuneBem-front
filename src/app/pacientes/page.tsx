@@ -7,6 +7,7 @@ import axios from "axios";
 import { redirect } from "next/navigation";
 import { Loading } from "@/components/Loading";
 import { Table } from "react-bootstrap";
+import { BotaoCadastro } from "@/components/botaoCadastro";
 
 export default function Patients() {
     const [patients, setPatients] = useState<IPatient[]>([])
@@ -40,8 +41,10 @@ export default function Patients() {
     return (
         <LayoutDashboard>
             <Loading loading={loading} />
-            <h1>Lista de Pacientes</h1>
-            <Table striped bordered hover variant="dark" style={{ marginTop: '1rem' }}>
+            <div className="row mt-5">
+                <div className="col-md-6"><h2 className="fw-bold">Pacientes</h2></div>
+                <div className="col-md-2 offset-4"> <BotaoCadastro rota={'/usuarios/novo-usuario'} titulo={"Novo Usuário"} /></div>
+            </div>            <Table striped bordered hover variant="dark" style={{ marginTop: '1rem' }}>
                 <thead>
                     <tr>
                         <th>ID</th>
