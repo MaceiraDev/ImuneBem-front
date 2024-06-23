@@ -73,7 +73,7 @@ export default function Login() {
       />
       <div className='container'>
         <div className={styles.div_pai}>
-          <Card style={{ width: '100%', boxShadow: 'rgba(0, 0, 0, 0.25) 0px 25px 50px -12px', }}>
+          <Card className='bg-dark' style={{ width: '100%', boxShadow: 'rgba(0, 0, 0, 0.25) 0px 25px 50px -12px', }}>
             <div className='row'>
               <div className='col-md-6'>
                 <div className='div_img'>
@@ -92,13 +92,13 @@ export default function Login() {
                       <img className={styles.logo} src='/imagens/logo_png.png' alt='Imagem de Login' />
                     </div>
                     <h3 className={styles.title_login} >Login</h3>
-                    <p>Digite os campos abaixo para entrar no painel</p>
+                    <p className='text-light'>Digite os campos abaixo para entrar no painel</p>
                     <div
                       className='col-md-12'
                     >
                       <label
                         htmlFor='email'
-                        className='form-label'
+                        className='form-label text-light'
                       >
                         CPF
                       </label>
@@ -120,7 +120,7 @@ export default function Login() {
                     >
                       <label
                         htmlFor='cpf'
-                        className='form-label'
+                        className='form-label text-light'
                       >
                         Senha
                       </label>
