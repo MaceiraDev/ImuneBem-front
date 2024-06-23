@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { Loading } from "@/components/Loading";
 import { Table } from "react-bootstrap";
 import { BotaoCadastro } from "@/components/botaoCadastro";
+import Link from "next/link";
 
 export default function Patients() {
   const [patients, setPatients] = useState<IPatient[]>([])
@@ -30,6 +31,17 @@ export default function Patients() {
         console.error('Erro ao buscar pacientes:', err);
         setLoading(false)
       })
+  }
+  async function detelarPatient(id: number) {
+    if (!token) {
+      redirect('/login');
+    } else {
+      if (confirm('Deseja deletar esse paciente?')) {
+        axios.delete("http://127.0.0.1:8000/api/patients/" + id, header)
+          .then(() => getPatients())
+          .catch(err => console.log(err))
+      }
+    }
   }
   useEffect(() => {
     if (!token) {
@@ -60,7 +72,10 @@ export default function Patients() {
               <td>{patient.id}</td>
               <td>{patient.name}</td>
               <td>{patient.age}</td>
-              <td><button type="button" className="btn btn-danger" ><i className="bi bi-trash"></i></button></td>
+              <td>
+                <Link href={'/pacientes/' + patient.id} type="button" title="Atualizar" className="btn btn-light me-1" ><i className="bi bi-pencil-square"></i></Link>
+                <button type="button" title="Deletar" className="btn btn-danger" onClick={() => detelarPatient(patient.id)}><i className="bi bi-trash"></i></button>
+              </td>
             </tr>
           ))}
         </tbody>

@@ -5,12 +5,10 @@ import axios from "axios";
 import Cookies from 'js-cookie';
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { setCookie } from "nookies";
 import { SyntheticEvent, useCallback, useRef } from "react";
 import { Card } from "react-bootstrap";
-import InputMask from 'react-input-mask';
 
-export default function Users() {
+export default function NewPatient() {
 
   const token = Cookies.get('@token');
   const refForm = useRef<any>();
@@ -102,7 +100,7 @@ export default function Users() {
                 Idade:
               </label>
               <input
-                type='numberr'
+                type='number'
                 className='form-control'
                 id='age'
                 required
