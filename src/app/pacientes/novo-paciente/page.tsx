@@ -1,5 +1,5 @@
 "use client";
-import { IPatient } from "@/app/interfaces/IPatient";
+import { IPatient } from "@/app/interfaces/IPatients";
 import { LayoutDashboard } from "@/components/LayoutDashboard";
 import axios from "axios";
 import Cookies from 'js-cookie';
@@ -30,7 +30,7 @@ export default function NewPatient() {
           Authorization: `Bearer ${token}`,
         },
       }
-      axios.post<IPatient[]>(
+      axios.post<IPatient>(
         "http://127.0.0.1:8000/api/patients",  // URL do endpoint
         {
           // Corpo da requisição (payload)
@@ -44,12 +44,13 @@ export default function NewPatient() {
         .then(response => {
           // Manipule a resposta aqui
           console.log(response.data);
+          //Usa o redirecinamento do proprio navegador
+          window.location.href = '/pacientes';
         })
         .catch(error => {
           // Manipule os erros aqui
           console.error(error);
         });
-      redirect('/pacientes')
     } else {
       refForm.current.classList.add('was-validated')
 
@@ -57,9 +58,7 @@ export default function NewPatient() {
   }, [])
 
   return (
-    <LayoutDashboard
-      token={token}
-    >
+    <LayoutDashboard>
       <h2 className="fw-bold mt-5">Novo Paciente</h2>
       <Card style={{ padding: '1rem', border: 'solid 1px #000' }}>
         <form

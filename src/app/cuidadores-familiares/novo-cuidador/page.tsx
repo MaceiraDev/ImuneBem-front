@@ -29,7 +29,7 @@ export default function NewCuidador() {
           Authorization: `Bearer ${token}`,
         },
       }
-      axios.post<IEmployees[]>(
+      axios.post<IEmployees>(
         "http://127.0.0.1:8000/api/employees",  // URL do endpoint
         {
           // Corpo da requisição (payload)
@@ -42,12 +42,12 @@ export default function NewCuidador() {
         .then(response => {
           // Manipule a resposta aqui
           console.log(response.data);
+          window.location.href = '/cuidadores-familiares';
         })
         .catch(error => {
           // Manipule os erros aqui
           console.error(error);
         });
-      redirect('/cuidadores-familiares')
     } else {
       refForm.current.classList.add('was-validated')
 
@@ -55,9 +55,7 @@ export default function NewCuidador() {
   }, [])
 
   return (
-    <LayoutDashboard
-      token={token}
-    >
+    <LayoutDashboard>
       <h2 className="fw-bold mt-5">Novo Cuidador / Familiar</h2>
       <Card style={{ padding: '1rem', border: 'solid 1px #000' }}>
         <form
@@ -65,7 +63,6 @@ export default function NewCuidador() {
           noValidate
           onSubmit={submitForm}
           ref={refForm}
-
         >
           <div className="row">
             <div

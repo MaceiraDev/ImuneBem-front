@@ -34,7 +34,7 @@ export default function Patients() {
   }
   async function detelarPatient(id: number) {
     if (!token) {
-      redirect('/login');
+      redirect('/');
     } else {
       if (confirm('Deseja deletar esse paciente?')) {
         axios.delete("http://127.0.0.1:8000/api/patients/" + id, header)
@@ -45,7 +45,7 @@ export default function Patients() {
   }
   useEffect(() => {
     if (!token) {
-      redirect('/login');
+      redirect('/');
     } else {
       getPatients();
     }
@@ -63,6 +63,7 @@ export default function Patients() {
             <th>ID</th>
             <th>Nome</th>
             <th>Idade</th>
+            <th>Email Vinculado</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -72,6 +73,7 @@ export default function Patients() {
               <td>{patient.id}</td>
               <td>{patient.name}</td>
               <td>{patient.age}</td>
+              <td>{patient.linked_email}</td>
               <td>
                 <Link href={'/pacientes/' + patient.id} type="button" title="Atualizar" className="btn btn-light me-1" ><i className="bi bi-pencil-square"></i></Link>
                 <button type="button" title="Deletar" className="btn btn-danger" onClick={() => detelarPatient(patient.id)}><i className="bi bi-trash"></i></button>
