@@ -6,6 +6,9 @@ import { useRouter } from 'next/navigation';
 import { setCookie } from 'nookies';
 import Card from 'react-bootstrap/Card';
 import InputMask from 'react-input-mask';
+import { Loading } from '@/components/Loading';
+import { Toast } from '@/components/Toast';
+import { IUser } from '../interfaces/IUser';
 
 export default function Login() {
 
@@ -14,7 +17,7 @@ export default function Login() {
     const refForm = useRef<any>();
     const [toast, setToast] = useState(false)
     const [loading, setLoading] = useState(false)
-    // const [user, setUser] = useState<IUser>()
+    //const [user, setUser] = useState<IUser>()
 
     const submitForm = useCallback((e: SyntheticEvent) => {
         e.preventDefault();
@@ -26,42 +29,48 @@ export default function Login() {
                 password: { value: string },
                 cpf: { value: string },
             }
-
             //Pega o valor do cpf e remove os . e -
             const cleanCPF = (cpf: string) => cpf.replace(/[^\d]/g, '');
             //salva o valor formatodo na const cpf
             const cpf = cleanCPF(target.cpf.value);
 
-            console.log('cpf logo a baxio')
-            console.log(cpf)
             axios.post('http://127.0.0.1:8000/api/login',
                 {
                     password: target.password.value,
                     //cpf é igual a const cpf formatada
                     cpf: cpf,
                 }
-            )
-                .then((res) => {
-                    setCookie(undefined, '@user', JSON.stringify(res.data.user))
-                    setCookie(undefined, '@token', res.data.token)
-                    router.push('/dashboard')
-                    setLoading(false)
-                })
-                .catch((err) => {
-                    console.log(err)
+            ).then((res) => {
+                const user = res.data.user
+                if (user.type_user !== 0) {
                     setToast(true)
                     setLoading(false)
-
-                })
+                    return
+                }
+                setCookie(undefined, '@user', JSON.stringify(user))
+                setCookie(undefined, '@token', res.data.token)
+                router.push('/dashboard')
+                setLoading(false)
+            }).catch((err) => {
+                console.log(err)
+                setToast(true)
+                setLoading(false)
+            })
 
         } else {
             refForm.current.classList.add('was-validated')
         }
-
     }, [])
 
     return (
         <>
+            <Loading loading={loading} />
+            <Toast
+                show={toast}
+                message='Usuário não encontrado'
+                colors='danger'
+                onClose={() => { setToast(false) }}
+            />
             <div className='container'>
                 <div className={styles.div_pai}>
                     <Card style={{ width: '100%', boxShadow: 'rgba(0, 0, 0, 0.25) 0px 25px 50px -12px', }}>

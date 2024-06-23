@@ -13,28 +13,28 @@
 
 //         console.log(usuario)
 
-//         // if (usuario.data.length === 1) {
-//         //     if (usuario.data[0].senha === senha) {
+//         if (usuario.data.length === 1) {
+//             if (usuario.data[0].senha === senha) {
 
-//         //         let objUsuario = usuario.data[0]
+//                 let objUsuario = usuario.data[0]
 
-//         //         delete objUsuario.senha
+//                 delete objUsuario.senha
 
-//         //         const token = jwt.sign(
-//         //             objUsuario,
-//         //             '123465',//secret
-//         //             {
-//         //                 // expiresIn: '1min'// dias
-//         //                 expiresIn: '1d'// dias
-//         //                 // expiresIn: '1h'// horas
-//         //                 // expiresIn: '1min'// minutos
-//         //             }
-//         //         )
+//                 const token = jwt.sign(
+//                     objUsuario,
+//                     '123465',//secret
+//                     {
+//                         // expiresIn: '1min'// dias
+//                         expiresIn: '1d'// dias
+//                         // expiresIn: '1h'// horas
+//                         // expiresIn: '1min'// minutos
+//                     }
+//                 )
 
-//         //         return NextResponse.json({ token: token })
+//                 return NextResponse.json({ token: token })
 
-//         //     }
-//         // }
+//             }
+//         }
 
 //         return NextResponse.json({
 //             message: "Dados incorretos"

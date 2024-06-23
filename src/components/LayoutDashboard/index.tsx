@@ -1,9 +1,8 @@
-
+import { redirect } from "next/navigation"
 import { ReactNode } from "react"
 
 interface IProps {
     children: ReactNode
-    token: string | undefined
 }
 
 export const LayoutDashboard = (props: IProps) => {
@@ -51,29 +50,22 @@ export const LayoutDashboard = (props: IProps) => {
                                     </a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className={`nav-link`} href={'/dashboard'}>
+                                    <a className={`nav-link`} href={'/pacientes'}>
                                         <span data-feather="home"></span>
-                                        Categorias
+                                        Pacientes
                                     </a>
                                 </li>
-                                {
-                                    <li className="nav-item">
-                                        <a
-                                            className={`nav-link`}
-                                            href={'/usuarios'}
-                                        >
-                                            <span data-feather="home"></span>
-                                            Usuários
-                                        </a>
-                                    </li>
-                                }
+                                <li className="nav-item">
+                                    <a className={`nav-link`} href={'/usuarios'}>
+                                        <span data-feather="home"></span>
+                                        Usuários
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </nav>
 
-                    <main
-                        className="col-md-9 ms-sm-auto col-lg-10 px-md-4"
-                    >
+                    <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                         {props.children}
                     </main>
 

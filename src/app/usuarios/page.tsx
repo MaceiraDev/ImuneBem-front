@@ -1,18 +1,18 @@
 "use client";
 import { LayoutDashboard } from "@/components/LayoutDashboard";
 import Cookies from 'js-cookie';
-import { redirect, useRouter } from "next/navigation";
-import { Table, Card } from "react-bootstrap";
+import { redirect } from "next/navigation";
+import { Table } from "react-bootstrap";
 import { BotaoCadastro } from "@/components/botaoCadastro";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { IUser } from './../interfaces/IUser';
+import { Loading } from "@/components/Loading";
 
 export default function Users() {
-
     const [users, setUsers] = useState<IUser[]>([]); // Definindo o estado como um array de IUser
     const token = Cookies.get('@token');
-    const router = useRouter();
+    const [loading, setLoading] = useState(false)
 
     const header = {
         headers: {
@@ -20,16 +20,18 @@ export default function Users() {
         }
     }
     function listUser() {
-        axios.get<IUser[]>("http://127.0.0.1:8000/api/users", header
-        ).then(response => {
-            const data = response.data.data;
-            setUsers(data)
-        }
-
-        ).catch(error => {
-            console.error('Erro ao buscar usuários:', error);
-        });
+        setLoading(true)
+        axios.get("http://127.0.0.1:8000/api/users", header)
+            .then(response => {
+                const data = response.data.data;
+                setUsers(data)
+                setLoading(false)
+            }).catch(error => {
+                console.error('Erro ao buscar usuários:', error);
+                setLoading(false)
+            });
     }
+
     useEffect(() => {
         if (!token) {
             redirect('/login');
@@ -43,20 +45,16 @@ export default function Users() {
             redirect('/login');
         } else {
             if (confirm('Deseja deletar esse usuário?')) {
-                axios.delete("http://127.0.0.1:8000/api/users/" + id, header).then(response => {
-                    const data = response.data;
-                    console.log(data);
-                    listUser();
-                }
-                )
+                axios.delete("http://127.0.0.1:8000/api/users/" + id, header)
+                    .then(() => listUser())
+                    .catch(err => console.log(err))
             }
         }
     }
 
     return (
-        <LayoutDashboard
-            token={token}
-        >
+        <LayoutDashboard>
+            <Loading loading={loading} />
             <h1>Usuários</h1>
             <div className="row">
                 <div className="col-md-6"></div>

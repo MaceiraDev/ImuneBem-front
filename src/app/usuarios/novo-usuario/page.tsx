@@ -66,7 +66,7 @@ export default function Users() {
             refForm.current.classList.add('was-validated')
 
         }
-    })
+    }, [])
 
     return (
         <LayoutDashboard

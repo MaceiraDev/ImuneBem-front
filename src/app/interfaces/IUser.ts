@@ -1,8 +1,11 @@
 export interface IUser {
-    id: number,
-    name: string,
-    email: string,
-    cpf: string,
-    type_user: number
+  id: number;
+  name: string;
+  email: string;
+  cpf: string;
+  type_user: number;
 }
 
+interface IData {
+  data: IUser[];
+}
