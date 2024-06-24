@@ -4,8 +4,6 @@ import { LayoutDashboard } from "@/components/LayoutDashboard";
 import axios from "axios";
 import Cookies from 'js-cookie';
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { setCookie } from "nookies";
 import { SyntheticEvent, useCallback, useRef } from "react";
 import { Card } from "react-bootstrap";
 import InputMask from 'react-input-mask';

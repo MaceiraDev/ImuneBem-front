@@ -8,8 +8,10 @@ interface IProps {
 }
 
 function logout() {
-  Cookies.get('@token');
-  window.location.href = '/';
+  if (confirm('Deseja realmente sair?')) {
+    Cookies.remove('@token');
+    window.location.href = '/';
+  }
 }
 
 export const LogoutButton = (props: IProps) => {
@@ -19,7 +21,7 @@ export const LogoutButton = (props: IProps) => {
       className='btn btn-dark'
       type="button"
     >
-      {props.titulo}
+      {props.titulo}<i className="bi bi-door-open ml-3"></i>
     </button>
   )
 }

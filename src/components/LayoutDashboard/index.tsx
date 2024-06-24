@@ -27,7 +27,7 @@ export const LayoutDashboard = (props: IProps) => {
         <div className="w-100"></div>
         <div className="navbar-nav">
           <div className="nav-item text-nowrap">
-            <LogoutButton titulo={'Sair'}/> 
+            <LogoutButton titulo={'Sair'} />
           </div>
         </div>
       </header>
@@ -43,25 +43,31 @@ export const LayoutDashboard = (props: IProps) => {
                 <li className="nav-item">
                   <a className={`nav-link`} href={'/dashboard'}>
                     <span data-feather="home"></span>
-                    Dashboard
+                    Dashboard <i className="bi bi-house"></i>
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className={`nav-link`} href={'/vacinas'}>
+                    <span data-feather="home"></span>
+                    Vacinas <i className="bi bi-heart-pulse"></i>
                   </a>
                 </li>
                 <li className="nav-item">
                   <a className={`nav-link`} href={'/pacientes'}>
                     <span data-feather="home"></span>
-                    Pacientes
+                    Pacientes <i className="bi bi-person-raised-hand"></i>
                   </a>
                 </li>
                 <li className="nav-item">
                   <a className={`nav-link`} href={'/cuidadores-familiares'}>
                     <span data-feather="home"></span>
-                    Cuidadores / Familiares
+                    Cuidadores / Familiares <i className="bi bi-person-arms-up"></i>
                   </a>
                 </li>
                 <li className="nav-item">
                   <a className={`nav-link`} href={'/usuarios'}>
                     <span data-feather="home"></span>
-                    Usuários
+                    Usuários <i className="bi bi-person-circle"></i>
                   </a>
                 </li>
               </ul>

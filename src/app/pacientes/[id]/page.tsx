@@ -5,7 +5,6 @@ import { Loading } from "@/components/Loading";
 import axios from "axios";
 import Cookies from 'js-cookie';
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { SyntheticEvent, useCallback, useEffect, useRef, useState } from "react";
 import { Card } from "react-bootstrap";
 
@@ -56,7 +55,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
       )
         .then(response => {
           console.log('Paciente atualizado:', response.data);
-          redirect('/pacientes');
+          window.location.href = '/pacientes';
         })
         .catch(error => {
           console.error('Erro ao atualizar paciente:', error);
@@ -68,7 +67,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     if (!token) {
-      redirect('/login');
+      window.location.href = '/';
     } else {
       getPatients();
     }

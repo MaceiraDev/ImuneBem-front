@@ -5,7 +5,6 @@ import { Loading } from "@/components/Loading";
 import axios from "axios";
 import Cookies from 'js-cookie';
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { SyntheticEvent, useCallback, useEffect, useRef, useState } from "react";
 import { Card } from "react-bootstrap";
 import InputMask from 'react-input-mask';
@@ -63,7 +62,7 @@ export default function UpUsers({ params }: { params: { id: string } }) {
       )
         .then(response => {
           console.log('Usuário atualizado:', response.data);
-          redirect('/usuarios');
+          window.location.href = '/usuarios';
         })
         .catch(error => {
           console.error('Erro ao atualizar usuário:', error);
@@ -75,7 +74,7 @@ export default function UpUsers({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     if (!token) {
-      redirect('/login');
+      window.location.href = '/';
     } else {
       getUser();
     }

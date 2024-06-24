@@ -1,6 +1,5 @@
 import { LayoutDashboard } from "@/components/LayoutDashboard";
 import { cookies } from 'next/headers'
-import { redirect } from "next/navigation";
 
 export default function Dashboard() {
 
@@ -8,7 +7,7 @@ export default function Dashboard() {
 
   const token = cookie.get('@token')
   if (!token) {
-    redirect('/login')
+    window.location.href = '/';
   }
   return (
     <LayoutDashboard>

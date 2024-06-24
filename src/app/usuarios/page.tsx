@@ -1,7 +1,6 @@
 "use client";
 import { LayoutDashboard } from "@/components/LayoutDashboard";
 import Cookies from 'js-cookie';
-import { redirect } from "next/navigation";
 import { Table } from "react-bootstrap";
 import { BotaoCadastro } from "@/components/botaoCadastro";
 import { useEffect, useState } from "react";
@@ -35,7 +34,7 @@ export default function Users() {
 
     useEffect(() => {
         if (!token) {
-            redirect('/login');
+          window.location.href = '/';
         } else {
             listUser();
         }
@@ -43,7 +42,7 @@ export default function Users() {
 
     async function deletarUser(id: number) {
         if (!token) {
-            redirect('/login');
+          window.location.href = '/';
         } else {
             if (confirm('Deseja deletar esse usuário?')) {
                 axios.delete("http://127.0.0.1:8000/api/users/" + id, header)

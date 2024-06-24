@@ -4,7 +4,6 @@ import Cookies from 'js-cookie';
 import { useEffect, useState } from "react";
 import { IPatient } from "../interfaces/IPatients";
 import axios from "axios";
-import { redirect } from "next/navigation";
 import { Loading } from "@/components/Loading";
 import { Table } from "react-bootstrap";
 import { BotaoCadastro } from "@/components/botaoCadastro";
@@ -34,7 +33,7 @@ export default function Patients() {
   }
   async function detelarPatient(id: number) {
     if (!token) {
-      redirect('/');
+      window.location.href = '/';
     } else {
       if (confirm('Deseja deletar esse paciente?')) {
         axios.delete("http://127.0.0.1:8000/api/patients/" + id, header)
@@ -45,7 +44,7 @@ export default function Patients() {
   }
   useEffect(() => {
     if (!token) {
-      redirect('/');
+      window.location.href = '/';
     } else {
       getPatients();
     }
