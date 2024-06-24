@@ -1,0 +1,18 @@
+.card {
+  width: 100%;
+  border: solid 2px #98fb98;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  text-align: center;
+  padding: 10px;
+  background: #212529;
+}
+
+.card h4 {
+  color: #fff;
+}
+
+.card span {
+  color: #fff;
+
+}
