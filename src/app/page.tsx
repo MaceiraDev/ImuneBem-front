@@ -8,7 +8,7 @@ import Card from 'react-bootstrap/Card';
 import InputMask from 'react-input-mask';
 import { Loading } from '@/components/Loading';
 import { Toast } from '@/components/Toast';
-import { IUser } from './interfaces/IUser';
+// import { IUser } from './interfaces/IUser';
 
 export default function Login() {
 
@@ -73,11 +73,11 @@ export default function Login() {
       />
       <div className='container'>
         <div className={styles.div_pai}>
-          <Card className='bg-dark' style={{ width: '100%', boxShadow: 'rgba(0, 0, 0, 0.25) 0px 25px 50px -12px', }}>
+          <Card className='bg-dark' style={{ width: '100%', boxShadow: 'rgba(0, 0, 0, 0.25) 0px 25px 50px -12px', borderRadius: '20px' }}>
             <div className='row'>
               <div className='col-md-6'>
                 <div className='div_img'>
-                  <img className={styles.img_login} src='/imagens/vacina_back.jpg' alt='Imagem de Login' />
+                  <img className={styles.img_login} src='/imagens/vacina_back.jpeg' alt='Imagem de Login' />
                 </div>
               </div>
               <div className='col-md-6'>

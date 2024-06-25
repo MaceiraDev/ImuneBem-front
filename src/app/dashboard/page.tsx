@@ -38,7 +38,7 @@ export default function Dashboard() {
           </div>
           <div className="row mt-5">
             <div className="col-md-8">
-              <Table striped bordered hover variant="dark" responsive>
+              <Table striped bordered hover variant="dark" responsive className={styles.table}>
                 <thead>
                   <tr>
                     <th>#</th>
@@ -68,7 +68,11 @@ export default function Dashboard() {
                 </tbody>
               </Table>
             </div>
-            <div className="col-md-4"></div>
+            <div className="col-md-4">
+              <div className="div">
+                <img src="/imagens/vacina_dash.jpg" className={styles.img_dash} alt="Imagem de uma Vacina" />
+              </div>
+            </div>
           </div>
         </div>
       </LayoutDashboard>

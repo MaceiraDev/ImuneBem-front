@@ -56,7 +56,7 @@ export default function Patients() {
         <div className="col-md-6"><h2 className="fw-bold">Pacientes</h2></div>
         <div className="col-md-2 offset-4"> <BotaoCadastro rota={'/pacientes/novo-paciente'} titulo={"Novo Paciente"} /></div>
       </div>
-      <Table striped bordered hover variant="dark" style={{ marginTop: '1rem' }}>
+      <Table striped bordered hover variant="dark" style={{ marginTop: '1rem' }} responsive>
         <thead>
           <tr>
             <th>ID</th>
