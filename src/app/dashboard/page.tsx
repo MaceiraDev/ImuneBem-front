@@ -1,26 +1,53 @@
+"use client"
 import { LayoutDashboard } from "@/components/LayoutDashboard";
-import { cookies } from 'next/headers'
 import styles from './styles.module.css'
 import { Table } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import Cookies from 'js-cookie';
+import axios from "axios";
+import { Loading } from "@/components/Loading";
+import { IInfos } from "../interfaces/IInfos";
 
 export default function Dashboard() {
+  const token = Cookies.get('@token');
+  const [loading, setLoading] = useState(false);
+  const [info, setInfos] = useState<IInfos>();
 
-  const cookie = cookies();
-
-  const token = cookie.get('@token')
-  if (!token) {
-    window.location.href = '/';
+  const header = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   }
 
-  return (
+  const getInfos = () => {
+    setLoading(true)
+    axios.get("http://127.0.0.1:8000/api/infos", header)
+      .then(res => {
+        setInfos(res.data)
+        console.log('Resposta da API:', res.data);
+        setLoading(false)
+      }).catch(err => {
+        console.error('Erro ao buscar vacinas:', err);
+        setLoading(false)
+      })
+  }
+
+  useEffect(() => {
+    if (!token) {
+      window.location.href = '/';
+    } else {
+      getInfos();
+    }
+  }, [token]); return (
     <>
       <LayoutDashboard>
+        <Loading loading={loading} />
         <div className="container">
           <div className="row">
             <div className="col-md-4 mt-3">
               <div className={styles.card}>
                 <h4>Total de Vacinas <i className="bi bi-clipboard2-pulse"></i></h4>
-                <span>2</span>
+                <span>{info ? info.total_vaccines : 'Carregando...'}</span>
               </div>
             </div>
             <div className="col-md-4 mt-3">
