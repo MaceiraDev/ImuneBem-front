@@ -48,9 +48,10 @@ export default function Agendamentos() {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nome</th>
-            <th>Idade</th>
-            <th>Email Vinculado</th>
+            <th>Paciente</th>
+            <th>Vacina</th>
+            <th>Data</th>
+            <th>Status</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -58,6 +59,10 @@ export default function Agendamentos() {
           {agendamentos.map(agenda => (
             <tr key={agenda.id}>
               <td>{agenda.id}</td>
+              <td>{agenda.patient_name}</td>
+              <td>{agenda.vaccine_name}</td>
+              <td>{agenda.date}</td>
+              <td>{agenda.status}</td>
               <td>
                 <Link href={'/pacientes/' + agenda.id} type="button" title="Atualizar" className="btn btn-light me-1" ><i className="bi bi-pencil-square"></i></Link>
               </td>
