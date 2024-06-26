@@ -31,6 +31,18 @@ export default function Agendamentos() {
       })
   }
 
+  async function deletarAgenda(id: number) {
+    if (!token) {
+      window.location.href = '/';
+    } else {
+      if (confirm('Deseja deletar esse agendamento?')) {
+        axios.delete("http://127.0.0.1:8000/api/schedulings/" + id, header)
+          .then(() => getAgendas())
+          .catch(err => console.log(err))
+      }
+    }
+  }
+
   useEffect(() => {
     if (!token) {
       window.location.href = '/';
@@ -65,6 +77,7 @@ export default function Agendamentos() {
               <td>{agenda.status}</td>
               <td>
                 <Link href={'/pacientes/' + agenda.id} type="button" title="Atualizar" className="btn btn-light me-1" ><i className="bi bi-pencil-square"></i></Link>
+                <button type="button" title="Deletar" className="btn btn-danger" onClick={() => deletarAgenda(agenda.id)}><i className="bi bi-trash"></i></button>
               </td>
             </tr>
           ))}
