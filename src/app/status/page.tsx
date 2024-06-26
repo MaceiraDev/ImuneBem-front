@@ -8,7 +8,7 @@ import { Table } from "react-bootstrap";
 import { IStatus } from "../interfaces/IStatus";
 
 export default function Status() {
-  const [teste, setStatus] = useState<IStatus[]>([])
+  const [data, setData] = useState<IStatus[]>([])
   const token = Cookies.get('@token');
   const [loading, setLoading] = useState(false)
 
@@ -22,7 +22,7 @@ export default function Status() {
     setLoading(true)
     axios.get("http://127.0.0.1:8000/api/status", header)
       .then(res => {
-        setStatus(res.data.data)
+        setData(res.data)
         setLoading(false)
       }).catch(err => {
         console.error('Erro ao buscar status:', err);
@@ -52,7 +52,12 @@ export default function Status() {
           </tr>
         </thead>
         <tbody>
-
+          {data.map(a => (
+            <tr key={a.id}>
+              <td>{a.id}</td>
+              <td>{a.description}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </LayoutDashboard>
