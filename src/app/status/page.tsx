@@ -30,6 +30,7 @@ export default function Status() {
       })
   }
 
+
   useEffect(() => {
     if (!token) {
       window.location.href = '/';
