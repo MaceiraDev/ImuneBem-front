@@ -16,7 +16,7 @@ export const Loading = (props: ILoading) => {
           height: '100%',
         }}
       >
-        <Spinner animation="border" variant="primary" />
+        <Spinner animation="border" style={{ color: '#98fb98' }} />
       </div>
       :
       <></>
