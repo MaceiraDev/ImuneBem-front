@@ -47,6 +47,12 @@ export const LayoutDashboard = (props: IProps) => {
                   </a>
                 </li>
                 <li className="nav-item">
+                  <a className={`nav-link`} href={'/agendamentos'}>
+                    <span data-feather="home"></span>
+                    Agendamentos <i className="bi bi-clipboard2-data"></i>
+                  </a>
+                </li>
+                <li className="nav-item">
                   <a className={`nav-link`} href={'/vacinas'}>
                     <span data-feather="home"></span>
                     Vacinas <i className="bi bi-heart-pulse"></i>
@@ -62,6 +68,12 @@ export const LayoutDashboard = (props: IProps) => {
                   <a className={`nav-link`} href={'/cuidadores-familiares'}>
                     <span data-feather="home"></span>
                     Cuidadores / Familiares <i className="bi bi-person-arms-up"></i>
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className={`nav-link`} href={'/status'}>
+                    <span data-feather="home"></span>
+                    Status <i className="bi bi-person-arms-up"></i>
                   </a>
                 </li>
                 <li className="nav-item">
