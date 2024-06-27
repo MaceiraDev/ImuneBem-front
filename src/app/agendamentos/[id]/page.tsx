@@ -88,6 +88,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
       )
         .then(response => {
           console.log('Agendamento atualizado:', response.data);
+          window.location.href = '/agendamentos';
         })
         .catch(error => {
           console.error('Erro ao atualizar agendamento:', error);

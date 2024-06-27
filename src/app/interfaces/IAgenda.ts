@@ -3,6 +3,6 @@ export interface IAgenda {
   patient_name: string;
   professional_id: number;
   vaccine_name: string;
-  status: number;
+  status_id: number;
   date: string;
 }

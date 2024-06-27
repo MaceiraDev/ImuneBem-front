@@ -73,7 +73,7 @@ export const LayoutDashboard = (props: IProps) => {
                 <li className="nav-item">
                   <a className={`nav-link`} href={'/status'}>
                     <span data-feather="home"></span>
-                    Status <i className="bi bi-person-arms-up"></i>
+                    Status <i className="bi bi-asterisk"></i>
                   </a>
                 </li>
                 <li className="nav-item">
