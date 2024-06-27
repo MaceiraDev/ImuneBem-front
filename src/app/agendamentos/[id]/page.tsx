@@ -23,7 +23,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
   const [patient_id, setPatId] = useState('');
   const [professional_id, setProfId] = useState('');
   const [vaccine_id, setVaccId] = useState('');
-  const [type, setType] = useState('');
+  const [type, setType] = useState(Number);
 
   const token = Cookies.get('@token');
   const refForm = useRef<any>();
@@ -33,7 +33,11 @@ export default function UpPatients({ params }: { params: { id: string } }) {
       Authorization: `Bearer ${token}`,
     },
   }
-
+  const typeMap: { [key: number]: string } = {
+    0: "Requerimento de vacina",
+    1: "Visita domiciliar",
+  };
+  
   const getStatus = () => {
     setLoading(true)
     axios.get("http://127.0.0.1:8000/api/status", header)
@@ -126,7 +130,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
         >
           <div className="row">
             <div className='col-md-3'>
-              <label htmlFor='name' className='form-label'>Paciente</label>
+              <label htmlFor='name' className='form-label'>Paciente:</label>
               <input
                 type='text'
                 className='form-control'
@@ -137,7 +141,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
               <div className='invalid-feedback'>Digite um nome:</div>
             </div>
             <div className='col-md-2'>
-              <label htmlFor='name' className='form-label'>Data do agendamento</label>
+              <label htmlFor='name' className='form-label'>Data do agendamento:</label>
               <input
                 type='date'
                 className='form-control'
@@ -186,7 +190,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
                 ))}
               </select>
             </div>
-            <div className='col-md-6'>
+            <div className='col-md-7'>
               <label htmlFor='description' className='form-label'>Descrição:</label>
               <textarea
                 className='form-control'
@@ -197,7 +201,16 @@ export default function UpPatients({ params }: { params: { id: string } }) {
               ></textarea>
               <div className='invalid-feedback'>Digite uma descrição:</div>
             </div>
-
+            <div className='col-md-3'>
+              <label htmlFor='name' className='form-label'>Tipo da visita:</label>
+              <input
+                type='text'
+                className='form-control'
+                id='name'
+                required
+                value={typeMap[type] || "Desconhecido"}
+                readOnly />
+            </div>
             <div className='col-md-12 mt-3' style={{ textAlign: "right" }}>
               <Link
                 className="btn btn-danger me-3"

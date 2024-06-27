@@ -38,6 +38,11 @@ export default function Agendamentos() {
     4: "Cancelado",
   };
 
+  const typeMap: { [key: number]: string } = {
+    0: "Requerimento de vacina",
+    1: "Visita domiciliar",
+  };
+
 
   useEffect(() => {
     if (!token) {
@@ -60,6 +65,7 @@ export default function Agendamentos() {
             <th>Vacina</th>
             <th>Data</th>
             <th>Status</th>
+            <th>Tipo da Visita</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -68,9 +74,10 @@ export default function Agendamentos() {
             <tr key={agenda.id}>
               <td>{agenda.id}</td>
               <td>{agenda.patient_name}</td>
-              <td>{agenda.vaccine_name}</td>
+              <td>{agenda.vaccine_name || "*Vacina não solicitada*"}</td>
               <td>{agenda.date}</td>
               <td>{statusMap[agenda.status_id] || "Desconhecido"}</td>
+              <td>{typeMap[agenda.type] || "Desconhecido"}</td>
               <td>
                 <Link href={'/agendamentos/' + agenda.id} type="button" title="Atualizar" className="btn btn-light me-1" ><i className="bi bi-pencil-square"></i></Link>
               </td>

@@ -5,4 +5,5 @@ export interface IAgenda {
   vaccine_name: string;
   status_id: number;
   date: string;
+  type: number; 
 }
