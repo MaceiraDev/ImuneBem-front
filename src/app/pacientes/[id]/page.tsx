@@ -1,5 +1,5 @@
 "use client";
-import { IPatient } from "@/app/interfaces/IPatient";
+import { IPatient } from "@/app/interfaces/IPatients";
 import { LayoutDashboard } from "@/components/LayoutDashboard";
 import { Loading } from "@/components/Loading";
 import axios from "axios";
@@ -49,7 +49,8 @@ export default function UpPatients({ params }: { params: { id: string } }) {
         `http://127.0.0.1:8000/api/patients/${params.id}`,
         {
           name: name,
-          age: age
+          age: age,
+          linked_email: linked_email
         },
         header
       )
@@ -78,7 +79,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
   }
 
   return (
-    <LayoutDashboard token={token}>
+    <LayoutDashboard>
       <h2 className="fw-bold mt-5">Atualizar Paciente</h2>
       <Card style={{ padding: '1rem', border: 'solid 1px #000' }}>
         <form
