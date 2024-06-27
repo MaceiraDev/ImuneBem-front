@@ -26,10 +26,10 @@ export default function Dashboard() {
     1: "Pendente",
     2: "Aceito",
     3: "Concluído",
-    4: "Cancelado", 
+    4: "Cancelado",
   };
-  
-  
+
+
   const getInfos = () => {
     setLoading(true)
     axios.get("http://127.0.0.1:8000/api/infos", header)
@@ -89,6 +89,7 @@ export default function Dashboard() {
           </div>
           <div className="row mt-5">
             <div className="col-md-8">
+              <h3 style={{ fontWeight: "bold", fontSize: '16pt' }}>Agendamentos Pendentes</h3>
               <Table striped bordered hover variant="dark" responsive className={styles.table}>
                 <thead>
                   <tr>
