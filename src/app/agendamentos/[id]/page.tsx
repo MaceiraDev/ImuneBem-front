@@ -85,12 +85,13 @@ export default function UpPatients({ params }: { params: { id: string } }) {
           date: date,
           type: type,
           professional_id: professional_id,
-          vaccine_id: vaccine_id,
+          vaccines_id: vaccine_id,
         },
         header
       )
         .then(response => {
           console.log('Agendamento atualizado:', response.data);
+          window.location.href = '/agendamentos';
         })
         .catch(error => {
           console.error('Erro ao atualizar agendamento:', error);
