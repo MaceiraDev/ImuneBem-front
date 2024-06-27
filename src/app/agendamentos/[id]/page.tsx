@@ -1,6 +1,7 @@
 "use client";
 import { IAgenda } from "@/app/interfaces/IAgenda";
 import { IStatus } from "@/app/interfaces/IStatus";
+import { IUser } from "@/app/interfaces/IUser";
 import { LayoutDashboard } from "@/components/LayoutDashboard";
 import { Loading } from "@/components/Loading";
 import axios from "axios";
@@ -21,9 +22,11 @@ export default function UpPatients({ params }: { params: { id: string } }) {
   const [description, setDescription] = useState('');
   const [status_id, setSta] = useState(Number);
   const [patient_id, setPatId] = useState('');
-  const [professional_id, setProfId] = useState('');
+  const [professional_id, setProfId] = useState(6);
+  // const [professionals, setProfessionals] = useState<IUser``>();
   const [vaccine_id, setVaccId] = useState('');
   const [type, setType] = useState(Number);
+  const [users, setUsers] = useState<IUser[]>([]); // Definindo o estado como um array de IUser
 
   const token = Cookies.get('@token');
   const refForm = useRef<any>();
@@ -37,7 +40,9 @@ export default function UpPatients({ params }: { params: { id: string } }) {
     0: "Requerimento de vacina",
     1: "Visita domiciliar",
   };
-  
+
+
+
   const getStatus = () => {
     setLoading(true)
     axios.get("http://127.0.0.1:8000/api/status", header)
@@ -49,8 +54,19 @@ export default function UpPatients({ params }: { params: { id: string } }) {
         setLoading(false)
       })
   }
-
-  const getEmployes = () => {
+  const getUsers = () => {
+    setLoading(true)
+    axios.get("http://127.0.0.1:8000/api/users/professionals", header)
+      .then(res => {
+        setUsers(res.data.data)
+        console.log(users)
+        setLoading(false)
+      }).catch(err => {
+        console.error('Erro ao buscar agendamentos pendentes:', err);
+        setLoading(false)
+      })
+  }
+  const getAgendamento = () => {
     setLoading(true);
     axios.get(`http://127.0.0.1:8000/api/schedulings/${params.id}`, header)
       .then(res => {
@@ -63,7 +79,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
         setVaccine(data.vaccine_name);
         setDescription(data.description);
         setPatId(data.patient_id);
-        setProfId(data.professional_id);
+        //setProfId(data.professional_id);
         setVaccId(data.vaccine_id);
         setType(data.type);
 
@@ -78,6 +94,9 @@ export default function UpPatients({ params }: { params: { id: string } }) {
     e.preventDefault();
 
     console.log('Status atual:', status_id);
+    console.log('Status atual:', users);
+
+    console.log(professional_id)
 
     if (refForm.current.checkValidity()) {
       axios.put<IAgenda>(
@@ -110,7 +129,8 @@ export default function UpPatients({ params }: { params: { id: string } }) {
       window.location.href = '/';
     } else {
       getStatus();
-      getEmployes();
+      getAgendamento();
+      getUsers();
     }
   }, [token]);
 
@@ -119,7 +139,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
   }
 
   return (
-    <LayoutDashboard token={token}>
+    <LayoutDashboard>
       <h2 className="fw-bold mt-5">Atualizar Agendamento</h2>
       <Card style={{ padding: '1rem', border: 'solid 1px #000' }}>
         <form
@@ -152,17 +172,29 @@ export default function UpPatients({ params }: { params: { id: string } }) {
               />
               <div className='invalid-feedback'>Digite um nome:</div>
             </div>
-            <div className='col-md-2'>
-              <label htmlFor='name' className='form-label'>Profisional de Saúde:</label>
-              <input
-                type='text'
-                className='form-control'
-                id='name'
+
+
+            <div className="col-md-4">
+              <label htmlFor="professional" className="form-label">Profissional:</label>
+              <select
+                className="form-select"
+                id="professional"
+                value={professional_id}
+                onChange={(e) => { 
+                  setProfId(Number(e.target.value))
+                }
+              }
                 required
-                value={prof}
-                readOnly />
-              <div className='invalid-feedback'>Digite um nome:</div>
+              >
+                <option value="" disabled>Selecione um profissional</option>
+                {users.map((user) => (
+                  <option key={user.id} value={user.id}>
+                    {user.name}
+                  </option>
+                ))}
+              </select>
             </div>
+
             <div className='col-md-3'>
               <label htmlFor='name' className='form-label'>Nome da vacina:</label>
               <input
