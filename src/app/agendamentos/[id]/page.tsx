@@ -22,6 +22,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
   const [status_id, setSta] = useState(Number);
   const [patient_id, setPatId] = useState('');
   const [professional_id, setProfId] = useState('');
+  const [vaccine_id, setVaccId] = useState('');
   const [type, setType] = useState('');
 
   const token = Cookies.get('@token');
@@ -59,6 +60,7 @@ export default function UpPatients({ params }: { params: { id: string } }) {
         setDescription(data.description);
         setPatId(data.patient_id);
         setProfId(data.professional_id);
+        setVaccId(data.vaccine_id);
         setType(data.type);
 
         setLoading(false);
@@ -83,12 +85,12 @@ export default function UpPatients({ params }: { params: { id: string } }) {
           date: date,
           type: type,
           professional_id: professional_id,
+          vaccine_id: vaccine_id,
         },
         header
       )
         .then(response => {
           console.log('Agendamento atualizado:', response.data);
-          window.location.href = '/agendamentos';
         })
         .catch(error => {
           console.error('Erro ao atualizar agendamento:', error);
